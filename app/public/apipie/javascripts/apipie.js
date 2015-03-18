@@ -1,6 +1,5 @@
 function inputTemplate(name, inputType) {
   inputType = typeof inputType !== 'undefined' ? inputType : 'text';
-  console.log(name);
   return  '<div class="control-group">' +
             '<label class="control-label" for="input' + name + '">' + name + '</label>' +
             '<div class="controls">' +
@@ -14,17 +13,24 @@ $.fn.apisSelector = function() {
     var result = $(this).find(".result");
     $(this).find('select').on('change', function(ev){
       var api = $(ev.currentTarget).val(),
-          re = /\/\:[^\s\/]+/ig,
+          re = /[\/\=]\:[^\s\/]+/ig,
           match = re.exec(api);
-      result.html();
+      result.html('');
       while (match != null) {
         var field = match[0].slice(2);
-        console.log(inputTemplate(field))
         result.append(inputTemplate(field));
         match = re.exec(api);
       }
     }).trigger('change');
-  })
+  });
+};
+$.fn.apiSubmiter = function() {
+  // this.each(function(){
+  //   $(this).onsubmit = function(ev){
+  //     console.log('onsubmit');
+  //     return false;
+  //   }
+  // });
 };
 
 $(document).ready(function() {
@@ -32,5 +38,6 @@ $(document).ready(function() {
     $('pre.ruby').addClass('prettyprint lang-rb');
     prettyPrint();
   }
-  $('[role=apis]').apisSelector();
+  $('[role="apis"]').apisSelector();
+  $('[role="api-params"]').apiSubmiter();
 });

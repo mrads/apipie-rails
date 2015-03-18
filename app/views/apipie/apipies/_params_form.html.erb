@@ -1,0 +1,24 @@
+<% level ||= 0 %>
+<% if level == 0 %>
+  <div class="control-group">
+    <h4><%= t('apipie.request_body') %></h4>
+  </div>
+<% end %>
+
+<% params.each do |param| %>
+  <% if !param[:show] %>
+    <%= render(:partial => "params_form", :locals => {:level => level, :params => param[:params]}) unless param[:params].blank? %>
+    <% next %>
+  <% end %>
+  <% if param[:params].blank? %>
+    <div class="control-group">
+      <div class="control-group">
+        <label class="control-label" for="<%= param[:name] %>"><%= param[:full_name] %></label>
+        <div class="controls">
+          <input type="text" name="<%= param[:name] %>" placeholder="<%= param[:full_name] %>">
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <%= render(:partial => "params_form", :locals => {:level => level + 1, :params => param[:params]}) unless param[:params].blank? %>
+<% end %>
