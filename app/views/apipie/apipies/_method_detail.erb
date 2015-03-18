@@ -44,3 +44,4 @@
     </tbody>
   </table>
 <% end %>
+<%= render(:partial => "method_form", :locals => {:method => method}) if Apipie.configuration.show_method_form %>
