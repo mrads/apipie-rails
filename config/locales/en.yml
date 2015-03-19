@@ -19,6 +19,8 @@ en:
         params: Params
         request: Request
         request_body: Request body
+        responce: Responce
+        responce_body: Responce body
         form_example: Form example
         examples: Examples
         metadata: Metadata

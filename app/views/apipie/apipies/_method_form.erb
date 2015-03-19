@@ -1,13 +1,13 @@
-<div class="row">
+<div class="row-fluid">
   <div class="span4">
     <h3><%= t('apipie.form_example') %></h3>
     <form class="form-horizontal" role="apis">
       <div class="control-group">
         <label class="control-label" for="request"><%= t('apipie.request') %></label>
         <div class="controls">
-          <select name="request">
+          <select role="api">
             <% method[:apis].each do |api| %>
-              <option value="<%= api[:api_url] %>"><%= api[:http_method] %> <%= api[:api_url] %></option>
+              <option><%= api[:http_method] %> <%= api[:api_url] %></option>
             <% end %>
           </select>
         </div>
@@ -20,9 +20,14 @@
       <button type="submit" class="btn btn-primary pull-right"><%= t('apipie.submit') %></button>
     </form>
   </div>
-  <div class="span8">
-    <pre>
-      <%= method.to_json %>
-    </pre>
+  <div class="span8" role="info">
+    <h4><%= t('apipie.request') %></h4>
+    <pre role="url"></pre>
+    <h4><%= t('apipie.request_body') %></h4>
+    <pre role="body"></pre>
+    <h4><%= t('apipie.responce') %></h4>
+    <pre role="status"></pre>
+    <h4><%= t('apipie.responce_body') %></h4>
+    <pre role="responce"></pre>
   </div>
 </div>
